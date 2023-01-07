@@ -4,7 +4,7 @@ Console.Writeline("Well, that's it!");
 Console.Write("No newline, what's your favorite color? ");
 user_fave_color = Console.Readline();
 Console.Writeline(user_fave_color);
-if (user_fave_color === "pink")
+if (user_fave_color == "pink")
 {
     Console.Writeline("Mine, too!");
 }
