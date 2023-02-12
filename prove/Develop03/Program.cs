@@ -17,13 +17,15 @@ class Program
     static void Main(string[] args)
     {
 
-            Scripture scripture = new Scripture(new Reference("Ether", "12", "27"), "And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me; for if they humble themselves before me, and have faith in me, then will I make weak things become strong unto them.");
+
+
             Console.Clear();
             Console.WriteLine("Welcome to Scripture Memorizer!");
             Console.WriteLine();
             Console.WriteLine("There is a preloaded scripture available to memorize (Ether 12:27), but you can also enter your own scripture.");
             Console.WriteLine("Would you like to enter your own scripture to memorize? y/n ");
             string ownScripture = Console.ReadLine();
+
             if (ownScripture == "y") {
                 Console.Clear();
                 Console.WriteLine("What is the book? ");
@@ -44,7 +46,7 @@ class Program
                     Console.WriteLine(userScripture.GetScriptureText());
                     int wordCount = userScripture.GetWordCount();
                     int hiddenCount = userScripture.IsCompletelyHidden(0, wordCount);
-                    Console.WriteLine($"{wordCount}, {hiddenCount}");
+
                     Console.WriteLine("\nPress enter to hide words or type 'quit' to exit program.");
 
                     userChoice = Console.ReadLine();
@@ -72,12 +74,15 @@ class Program
                         }
                     }
             else {
+                Scripture scripture = new Scripture(new Reference("Ether", "12", "27"), "And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me; for if they humble themselves before me, and have faith in me, then will I make weak things become strong unto them.");
+
                 string userChoice = "";
+
                 while (userChoice != "quit") {
                     Console.WriteLine(scripture.GetScriptureText());
                     int wordCount = scripture.GetWordCount();
                     int hiddenCount = scripture.IsCompletelyHidden(0, wordCount);
-                    Console.WriteLine($"{wordCount}, {hiddenCount}");
+
                     Console.WriteLine("\nPress enter to hide words or type 'quit' to exit program.");
 
                     userChoice = Console.ReadLine();
@@ -90,20 +95,21 @@ class Program
 
                         if (scripture.IsCompletelyHidden(0, wordCount) == 0) {
                             break;
-                    }
+                        }
                         else {
                             scripture.HideRandomWords();
                         }
+
                             if (scripture.IsCompletelyHidden(0, wordCount) == 0) {
-                            break;
+                                break;
                             }
                             else {
                                 scripture.HideRandomWords();
                             }
 
-                            }
-                        }
+                    }
                 }
-    }
+            }
+}
 
 }
