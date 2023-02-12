@@ -18,15 +18,23 @@ class Program
     {
 
             Scripture scripture = new Scripture(new Reference("Ether", "12", "27"), "And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me; for if they humble themselves before me, and have faith in me, then will I make weak things become strong unto them.");
+            Console.Clear();
+            Console.WriteLine("Welcome to Scripture Memorizer!");
+            Console.WriteLine();
+            Console.WriteLine("There is a preloaded scripture available to memorize (Ether 12:27), but you can also enter your own scripture.");
             Console.WriteLine("Would you like to enter your own scripture to memorize? y/n ");
             string ownScripture = Console.ReadLine();
             if (ownScripture == "y") {
+                Console.Clear();
                 Console.WriteLine("What is the book? ");
                 string book = Console.ReadLine();
+                Console.Clear();
                 Console.WriteLine("What is the chapter? ");
                 string chapter = Console.ReadLine();
+                Console.Clear();
                 Console.WriteLine("What are the verses (x or x-x for multiple verses)?");
                 string verses = Console.ReadLine();
+                Console.Clear();
                 Console.WriteLine("What is the text of the verses? Hit return only after all verses are typed. ");
                 string text = Console.ReadLine();
                 Scripture userScripture = new Scripture(new Reference(book, chapter, verses), text);
