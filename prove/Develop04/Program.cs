@@ -1,6 +1,6 @@
-
-
 using System;
+using System.Threading;
+using System.Diagnostics;
 
 class Program
 {
@@ -10,22 +10,61 @@ class Program
         Console.WriteLine("Choose a Mindfulness Activity to Begin.");
         Console.WriteLine();
         Menu menu = new Menu("Breathing Activity", "Reflection Activity", "Listing Activity");
-        menu.DisplayMenu();
-        Console.WriteLine("Type 1, 2, or 3 to begin an activity. Or type 'quit' to end the program.");
-        string userChoice = Console.ReadLine();
-        while (userChoice != "quit") {
-            
-            if (userChoice == "1")
-            {   
-                string activityName = "Breathing Activity";
-//                 Console.WriteLine($"How long do you want to do the {activityName} (in seconds)?");
-//                 string timeInput = Console.ReadLine();
-//                 Activity activity = new Activity(timeInput);
-//                 activity.GetIntTime(timeInput);
-//                 BreathingActivity breathe = new BreathingActivity("This activity will help you control your breathing. Controlling your breath can calm anxiety, help you think more clearly, and increase your access to the Spirit.\nPress enter when you're ready to start.");
+        string userChoice = "";
+        
+        do
+        {
+            menu.DisplayMenu();
+            Console.WriteLine();
+            Console.WriteLine("Type 1, 2, or 3 to begin an activity. Type 4 to quit.");
+            userChoice = Console.ReadLine();
+            Activity activity = new Activity();
 
+            switch (userChoice)
+            {
+                case "1":
+                    string activityName = "Breathing Activity";
+                    int time = activity.GetIntTime(activityName);
+                    Console.Clear();
+                    Console.WriteLine(activity.GetStartMessage(activityName, time));
+                    activity.Pause();
+                    BreathingActivity breathe = new BreathingActivity();
+                    Console.WriteLine(breathe.GetBreathDescription());
+                    Console.ReadKey(true);
+                    breathe.RunBreathingActivity(time);
+                    break;
+
+                case "2":
+                    activityName = "Reflecting Activity";
+                    time = activity.GetIntTime(activityName);
+                    Console.Clear();
+                    Console.WriteLine(activity.GetStartMessage(activityName, time));
+                    activity.Pause();
+                    ReflectingActivity reflect = new ReflectingActivity();
+                    Console.WriteLine(reflect.GetReflectionDescription());
+                    Console.ReadKey(true);
+                    reflect.RunReflectingActivity(time);               
+                    break;
+
+                case "3":
+                    activityName = "Listing Activity";
+                    time = activity.GetIntTime(activityName);
+                    Console.Clear();
+                    Console.WriteLine(activity.GetStartMessage(activityName, time));
+                    Console.WriteLine();
+                    ListingActivity list = new ListingActivity();
+                    Console.WriteLine(list.GetListingDescription());
+                    Console.ReadKey(true);
+                    list.RunListingActivity(time);
+                    break;
+
+                case "4":
+                    break;
 
             }
+         
         }
+
+        while (userChoice != "4");
     }
-}
+}       
