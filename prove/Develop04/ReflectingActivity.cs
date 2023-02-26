@@ -28,8 +28,14 @@ public class ReflectingActivity : Activity
         return reflectDescription;
     }
 
-    public void RunReflectingActivity(int time) {
+    public void RunReflectingActivity(string activityName, int time) {
         Console.Clear();
+        Console.WriteLine(base.GetStartMessage(activityName, time));
+        base.Pause();
+        Console.WriteLine(GetReflectionDescription());
+        Console.ReadKey(true);
+        Console.Clear();
+
         s.Start();
         Console.WriteLine(GetPrompt());
         while (s.Elapsed < TimeSpan.FromSeconds(time)) 

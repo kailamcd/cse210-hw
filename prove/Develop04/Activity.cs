@@ -1,3 +1,4 @@
+using System.Diagnostics;
 public class Activity
 {
     private string _startMessage = "Welcome. Get comfortable, and let's start your";

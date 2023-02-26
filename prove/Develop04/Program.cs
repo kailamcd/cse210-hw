@@ -23,39 +23,24 @@ class Program
             switch (userChoice)
             {
                 case "1":
-                    string activityName = "Breathing Activity";
-                    int time = activity.GetIntTime(activityName);
-                    Console.Clear();
-                    Console.WriteLine(activity.GetStartMessage(activityName, time));
-                    activity.Pause();
                     BreathingActivity breathe = new BreathingActivity();
-                    Console.WriteLine(breathe.GetBreathDescription());
-                    Console.ReadKey(true);
-                    breathe.RunBreathingActivity(time);
+                    string activityName = "Breathing Activity";
+                    int time = breathe.GetIntTime(activityName);
+                    breathe.RunBreathingActivity(activityName, time);
                     break;
 
                 case "2":
-                    activityName = "Reflecting Activity";
-                    time = activity.GetIntTime(activityName);
-                    Console.Clear();
-                    Console.WriteLine(activity.GetStartMessage(activityName, time));
-                    activity.Pause();
                     ReflectingActivity reflect = new ReflectingActivity();
-                    Console.WriteLine(reflect.GetReflectionDescription());
-                    Console.ReadKey(true);
-                    reflect.RunReflectingActivity(time);               
+                    activityName = "Reflecting Activity";
+                    time = reflect.GetIntTime(activityName);
+                    reflect.RunReflectingActivity(activityName, time);               
                     break;
 
                 case "3":
-                    activityName = "Listing Activity";
-                    time = activity.GetIntTime(activityName);
-                    Console.Clear();
-                    Console.WriteLine(activity.GetStartMessage(activityName, time));
-                    Console.WriteLine();
                     ListingActivity list = new ListingActivity();
-                    Console.WriteLine(list.GetListingDescription());
-                    Console.ReadKey(true);
-                    list.RunListingActivity(time);
+                    activityName = "Listing Activity";
+                    time = list.GetIntTime(activityName);
+                    list.RunListingActivity(activityName, time);
                     break;
 
                 case "4":

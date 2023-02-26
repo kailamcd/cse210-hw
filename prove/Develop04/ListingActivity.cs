@@ -27,8 +27,15 @@ public class ListingActivity : Activity
         return listDescription;
     }
 
-    public void RunListingActivity(int time) {
+    public void RunListingActivity(string activityName, int time) {
         Console.Clear();
+                // Console.Clear();
+        Console.WriteLine(base.GetStartMessage(activityName, time));
+        base.Pause();
+        Console.WriteLine(GetListingDescription());
+        Console.ReadKey(true);
+        Console.Clear();
+
         _prompt = GetPrompt();
         Console.WriteLine(_prompt);
         s.Start();
