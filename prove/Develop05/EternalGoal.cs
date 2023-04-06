@@ -9,7 +9,7 @@ public class EternalGoal : Goal
 
     public override string MakeGoalString(string name, string description, string difficulty, string toDoNum = "1", string goalType = "Simple Goal",  string isComplete = "false")
     {
-        string goalString = $"{name}:, {description}, ({goalType}), {toDoNum}, {difficulty}";
+        string goalString = $"[ ],{name}:,{description},({goalType}),{toDoNum},{difficulty}";
         return goalString;
     }
 

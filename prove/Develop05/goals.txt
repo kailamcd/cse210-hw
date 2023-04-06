@@ -1,2 +1,2 @@
-toot:, now, (Simple Goal), 1, e
-toot:, now, (Simple Goal), 1, e
+[ ],relax:,oh boy,(Simple Goal),1,x
+[ ],get things done:,jeez,(Simple Goal),1,d

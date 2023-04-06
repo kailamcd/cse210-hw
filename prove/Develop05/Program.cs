@@ -7,13 +7,15 @@ class Program
     {
         string noExtension;
         Console.Clear();
-
-        Menu menu = new Menu("Create New Goal", "Record Event", "Load File", "Save File", "Show Goals");
+    
+        Menu menu = new Menu("Create New Goal", "Record Event", "Load File", "Save File", "My Score");
+        AccessFile file = new AccessFile();
         string mainMenuChoice;
         string goalChoice;
         
         do
         {
+
             menu.DisplayMainMenu();
             Console.WriteLine();
             mainMenuChoice = Console.ReadLine();
@@ -58,29 +60,30 @@ class Program
                     break;
 
                 case "2":
-                    break;
+                    Event check = new Event();
+                    continue;
 
                 case "3":
                     Console.Clear();
                     Console.WriteLine("Which goal file would you like to load? Type the file name with no extension. ");
                     noExtension = Console.ReadLine();
-                    AccessFile l = new AccessFile();
-                    string fileName = l.GetFileName(noExtension);
+                    string fileName = file.GetFileName(noExtension);
                     if (File.Exists(fileName))
                     {
-                        l.Load();
+                        file.Load(fileName);
                     }
                     else 
                     {
                         Console.WriteLine($"Could not find {fileName}. Please check your spelling and try again.");
                     }
-                    break;
+                    file.ShowGoals();               
+
+                    continue;
 
                 case "4":
                     Console.Clear();
                     Console.WriteLine("Where should your goals be saved? Type a file name with no extension. ");
                     noExtension = Console.ReadLine();
-                    AccessFile file = new AccessFile();
                     fileName = file.GetFileName(noExtension);
                     if (File.Exists($"{fileName}"))
                     {
@@ -93,10 +96,16 @@ class Program
                         file.CreateFile(fileName);
                         file.Save(Goal._goals);
                     }
-                    break;
+                    Console.Clear();
+                    Console.WriteLine("Your goals:");
+                    file.ShowGoals();               
+                    continue;
 
                 case "5":
-                    break;
+
+                    Console.WriteLine($"Your score is: {file.GetPoints()}");
+                    Console.ReadKey(true);
+                    continue;
 
                 case "6":
                     break;

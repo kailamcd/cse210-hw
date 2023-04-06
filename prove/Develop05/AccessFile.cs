@@ -3,6 +3,7 @@ public class AccessFile
 
 {
     protected List<string> _goals = new List<string>();
+    private int _points;
     private string _fileName;
     int _diffNum;
     public AccessFile()
@@ -34,16 +35,19 @@ public class AccessFile
         }
     }
     
-    public void Load()
+    public void Load(string fileName)
     {
+        int index = 0;
         string[] lines = System.IO.File.ReadAllLines(_fileName);
         foreach (string line in lines)
         {
+
             string[] parts = line.Split(new string[] {",", ", "}, StringSplitOptions.None);
-            string name = parts[0];
-            string description = parts[1];
-            string goalType = parts[2];
-            string difficulty = parts[3];
+            string name = parts[1];
+            string description = parts[2];
+            string goalType = parts[3];
+            string numOfTimes = parts[4];
+            string difficulty = parts[5];
             if (difficulty == "e")
             {
                 _diffNum = 10;
@@ -60,9 +64,79 @@ public class AccessFile
             {
                 _diffNum = 100;
             }
-            string toDoNum = parts[4];
-            Console.WriteLine($"{name}{description}{goalType}\nWorth {_diffNum} points.\n");
+            parts[5] = _diffNum.ToString();
+            index += 1;
+
+            _goals.Add($"{index}. {name} {description}{goalType}\nWorth {_diffNum} points.\n");
         }
 
+    }
+    public void ShowGoals()
+    {
+        Console.Clear();
+        foreach (string goal in _goals)
+        {
+            Console.WriteLine(goal);
+        }
+        Console.ReadKey(true);
+    }
+
+    // public void CheckGoal()
+    // {
+    //     Console.WriteLine("Which goal would you like to use?");
+    //     string changeGoal = Console.ReadLine();
+    //     int goal = int.Parse(changeGoal);
+    //     string[] lines = System.IO.File.ReadAllLines(_fileName);
+
+    //     foreach (string goal in _goals)
+    //     {
+    //         string[] parts = line.Split(new string[] {",", ", "}, StringSplitOptions.None);
+    //         complete = parts[0];
+
+    //         if (goal = complete)
+    //         {
+                
+    //         }
+    //     }
+    // }
+
+
+
+    public int GetPoints()
+    {
+        string[] lines = System.IO.File.ReadAllLines(_fileName);
+        foreach (string line in lines)
+        {
+
+            string[] parts = line.Split(new string[] {",", ", "}, StringSplitOptions.None);
+            string done = parts[0];
+            string difficulty = parts[5];
+            if (done == "[X]")
+            {
+                if (difficulty == "e")
+                {
+                    _diffNum = 10;
+                }
+                else if (difficulty == "m")
+                {
+                    _diffNum = 25;
+                }
+                else if (difficulty == "d")
+                {
+                    _diffNum = 50;
+                }
+                else if (difficulty == "x")
+                {
+                    _diffNum = 100;
+                }
+                _points += _diffNum;
+            }
+            else
+            {
+                _points += 0;
+            }
+
+    }
+    return _points;
     }
 }
