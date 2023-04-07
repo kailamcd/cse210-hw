@@ -5,11 +5,13 @@ class Program
 {
     static void Main(string[] args)
     {
+        
         string noExtension;
         Console.Clear();
     
         Menu menu = new Menu("Create New Goal", "Record Event", "Load File", "Save File", "My Score");
         AccessFile file = new AccessFile();
+        Event e = new Event();
         string mainMenuChoice;
         string goalChoice;
         
@@ -60,7 +62,7 @@ class Program
                     break;
 
                 case "2":
-                    Event check = new Event();
+                    // Event check = new Event();
                     continue;
 
                 case "3":
@@ -102,7 +104,9 @@ class Program
                     continue;
 
                 case "5":
-
+                    Console.WriteLine("Which goal do you want to complete?");
+                    string goalToComplete = Console.ReadLine();
+                    e.CompleteGoal(goalToComplete);
                     Console.WriteLine($"Your score is: {file.GetPoints()}");
                     Console.ReadKey(true);
                     continue;

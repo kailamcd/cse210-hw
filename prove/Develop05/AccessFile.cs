@@ -2,7 +2,8 @@ using System.IO;
 public class AccessFile
 
 {
-    protected List<string> _goals = new List<string>();
+    protected List<string> _stringGoals = new List<string>();
+    protected static List<string> _csGoals = new List<string>();
     private int _points;
     private string _fileName;
     int _diffNum;
@@ -43,62 +44,46 @@ public class AccessFile
         {
 
             string[] parts = line.Split(new string[] {",", ", "}, StringSplitOptions.None);
+            string done = parts[0];
             string name = parts[1];
             string description = parts[2];
             string goalType = parts[3];
             string numOfTimes = parts[4];
             string difficulty = parts[5];
-            if (difficulty == "e")
-            {
-                _diffNum = 10;
-            }
-            else if (difficulty == "m")
-            {
-                _diffNum = 25;
-            }
-            else if (difficulty == "d")
-            {
-                _diffNum = 50;
-            }
-            else if (difficulty == "x")
-            {
-                _diffNum = 100;
-            }
-            parts[5] = _diffNum.ToString();
+            parts[5] = DetermineDiff(difficulty).ToString();
             index += 1;
 
-            _goals.Add($"{index}. {name} {description}{goalType}\nWorth {_diffNum} points.\n");
+            _csGoals.Add($"{index},{done},{name},{description},{goalType},{numOfTimes},{_diffNum}");
+            _stringGoals.Add($"{index}. {name} {description}{goalType}\nWorth {_diffNum} points.\n");
         }
 
+    }
+
+    public void Replace(int index, string newValue)
+    {
+
+        _csGoals[index] = newValue;
+
+    }
+
+    public static List<string> GetAllGoals()
+    {
+        var goalList = new List<string>();
+        foreach (string goal in _csGoals)
+        {
+            goalList.Add(goal);
+        }
+        return goalList;
     }
     public void ShowGoals()
     {
         Console.Clear();
-        foreach (string goal in _goals)
+        foreach (string goal in _stringGoals)
         {
             Console.WriteLine(goal);
         }
         Console.ReadKey(true);
     }
-
-    // public void CheckGoal()
-    // {
-    //     Console.WriteLine("Which goal would you like to use?");
-    //     string changeGoal = Console.ReadLine();
-    //     int goal = int.Parse(changeGoal);
-    //     string[] lines = System.IO.File.ReadAllLines(_fileName);
-
-    //     foreach (string goal in _goals)
-    //     {
-    //         string[] parts = line.Split(new string[] {",", ", "}, StringSplitOptions.None);
-    //         complete = parts[0];
-
-    //         if (goal = complete)
-    //         {
-                
-    //         }
-    //     }
-    // }
 
 
 
@@ -113,7 +98,21 @@ public class AccessFile
             string difficulty = parts[5];
             if (done == "[X]")
             {
-                if (difficulty == "e")
+                DetermineDiff(difficulty);
+                _points += _diffNum;
+            }
+            else
+            {
+                _points += 0;
+            }
+
+    }
+    return _points;
+    }
+
+    public int DetermineDiff(string difficulty)
+    {
+          if (difficulty == "e")
                 {
                     _diffNum = 10;
                 }
@@ -129,14 +128,7 @@ public class AccessFile
                 {
                     _diffNum = 100;
                 }
-                _points += _diffNum;
+            return _diffNum;
             }
-            else
-            {
-                _points += 0;
-            }
+    }
 
-    }
-    return _points;
-    }
-}
